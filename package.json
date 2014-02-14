@@ -4,6 +4,10 @@
     "author": "Ben Nelson <ben.nelson@healthcatalyst.com>",
     "version": "0.0.1",
     "main": "./views/index.html",
+    "window": {
+        "toolbar": false,
+        "frame": false
+    },
     "dependencies": {
         "connect": "1.8.5",
         "express": "2.5.2",

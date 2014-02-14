@@ -94,12 +94,12 @@
  console.log('Listening on http://0.0.0.0:' + port );
  */
 
-
+/*
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://bytenel:M111r0ck$@ds027789.mongolab.com:27789/central');
 
 //now that i'm connected to the server i can do stuff
-
+*/
 //TODO:
 // --!!!TDD using QUnit!!!
 //plan database
