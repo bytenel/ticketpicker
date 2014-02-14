@@ -2,3 +2,12 @@ body{
     -webkit-app-region: drag;
     font-family: sans-serif;
 }
+
+button{
+    -webkit-app-region: no-drag; /*so you can't drag buttons*/
+}
+
+.unselectable{
+    -webkit-user-select: none;
+    -webkit-app-region: drag;
+}
