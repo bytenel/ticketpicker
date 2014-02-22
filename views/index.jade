@@ -2,18 +2,23 @@
    Created by ben.nelson on 2/14/14.
 
 doctype html
-html(lang="en")
+html(lang="en", ng-app="ticketpicker")
     head
         title= "Ticket Picker"
-        script(type='text/javascript', src='../lib/jquery-2.1.0.js')
-        link(rel='stylesheet', href='../lib/bootstrap/css/bootstrap.css')
-        script(rel='stylesheet', src='../lib/bootstrap/js/bootstrap.js')
+
         script(type='text/javascript', src='../scripts/viewmodel/baseUI.js')
+        script(type='text/javascript', src='../app/bower_components/angular/angular.js')
+        script(type='text/javascript', src='../app/bower_components/angular-resource/angular-resource.js')
+        script(type='text/javascript', src='../scripts/app.js')
+        script(type='text/javascript', src='../scripts/services/database.js')
+        script(type='text/javascript', src='../scripts/controllers/controllers.js')
         link(rel='stylesheet', href='style/base.css')
+        link(rel='stylesheet', href='../app/bower_components/bootstrap/dist/css/bootstrap.css')
     body.unselectable
-       div.col-xs-12
+       div.col-xs-12(ng-controller="main")
            div.col-xs-8
-            h1 Jade - node template engine
+            h1 {{ page_title }}
+
            div.col-xs-4
             button(type='button', class='close', aria-hidden='true', onclick='quit()').&times
         #container.col
