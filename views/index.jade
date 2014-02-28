@@ -22,11 +22,8 @@ html(lang="en", ng-app="ticketpicker")
            div.col-xs-4
             button(type='button', class='close', aria-hidden='true', onclick='quit()').&times
         #container.col
-            if youAreUsingJade
-                p You are amazing
-            else
-                p Get on it
-            p.
-              Jade is a terse and simple
-              templating language with a
-                this is a test
+          p
+           div.users
+               div.user(ng-repeat='user in users')
+                   {{ name }}
+
