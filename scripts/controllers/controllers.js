@@ -5,11 +5,15 @@ ticketpicker.controller('main', ["$scope", "$datacontext", function($scope){
     $scope.users = [];
 
     $scope.addUser = function(user){
-        this.users.push(user);
+        var nameIsUnique = this.users.every(function isUnique(element){
+                                  return element.name != user.name;
+                              });
+        if(nameIsUnique)
+            this.users.push(user);
     }
 
     $scope.removeUser = function(userName){
-        this.users = this.users.filter(function(element){
+        $scope.users = this.users.filter(function(element){
             return element.name != userName;
         });
     }

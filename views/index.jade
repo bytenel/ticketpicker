@@ -15,15 +15,21 @@ html(lang="en", ng-app="ticketpicker")
         link(rel='stylesheet', href='style/base.css')
         link(rel='stylesheet', href='../app/bower_components/bootstrap/dist/css/bootstrap.css')
     body.unselectable
-       div.col-xs-12(ng-controller="main")
-           div.col-xs-8
-            h1 {{ page_title }}
-
+       .col-xs-12(ng-controller="main")
            div.col-xs-4
+            h1 Users
+
+           div.col-xs-8
             button(type='button', class='close', aria-hidden='true', onclick='quit()').&times
-        #container.col
-          p
            div.users
-               div.user(ng-repeat='user in users')
-                   {{ name }}
+            .user(ng-repeat='user in users')
+                {{ user.name }}
+                button(ng-click="removeUser(user.name)", class="btn btn-danger") Remove User
+            .userManagement
+            form(name="userInput")
+                input(type="text", name="name", ng-model="name", placeholder="Name", required)
+                input(type="text", ng-model="lastWin", placeholder="Last Win")
+                button(ng-disabled="!userInput.name.$valid" ng-click="addUser({ name: name, lastWin: lastWin })", class="btn btn-primary") Add User
+                p
+                    small(ng-show="!userInput.name.$valid") Name for the user is required.
 

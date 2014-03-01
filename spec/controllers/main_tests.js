@@ -73,3 +73,22 @@ var init = {
         ok(this.$scope.users);
         equal(this.$scope.users.length, users.length);
     });
+
+    test("unique user names", function(){
+        // arrange
+        var $controller = injector.get('$controller');
+        $controller('main', {
+            $scope: this.$scope
+        });
+        var users = [{name: "ben", wins: [], lastWin: null}];
+
+        // act
+        this.$scope.addUser({name: "ben", wins: [], lastWin: null});
+        this.$scope.addUser({name: "ben", wins: [], lastWin: null});
+
+        console.log(this.$scope.users);
+
+        //assert
+        ok(this.$scope.users);
+        equal(this.$scope.users.length, users.length);
+    });

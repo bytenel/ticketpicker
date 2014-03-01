@@ -5,8 +5,7 @@
     "version": "0.0.1",
     "main": "./views/index.html",
     "window": {
-        "toolbar": false,
-        "frame": false
+        "toolbar": false
     },
   "dependencies": {
       "connect": "1.8.5",
