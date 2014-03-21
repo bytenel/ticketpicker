@@ -15,6 +15,8 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+  grunt.loadNpmTasks('grunt-contrib-jade');
+  
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -35,7 +37,7 @@ module.exports = function (grunt) {
         }
       },
       jsTest: {
-        files: ['test/spec/{,*/}*.js'],
+        files: ['spec/{,*/}*.js'],
         tasks: ['newer:jshint:test', 'karma']
       },
       compass: {
@@ -55,6 +57,22 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
       }
+    },
+
+    jade: {
+        compile: {
+            options: {
+                client: false,
+                pretty: true
+            },
+            files: [ {
+              cwd: "views",
+              src: "**/*.jade",
+              dest: "templates",
+              expand: true,
+              ext: ".html"
+            } ]
+        }
     },
 
     // The actual grunt server settings
@@ -79,7 +97,7 @@ module.exports = function (grunt) {
           port: 9001,
           base: [
             '.tmp',
-            'test',
+            'spec',
             '<%= yeoman.app %>'
           ]
         }
@@ -103,9 +121,9 @@ module.exports = function (grunt) {
       ],
       test: {
         options: {
-          jshintrc: 'test/.jshintrc'
+          jshintrc: 'spec/.jshintrc'
         },
-        src: ['test/spec/{,*/}*.js']
+        src: ['spec/{,*/}*.js']
       }
     },
 
@@ -395,12 +413,14 @@ module.exports = function (grunt) {
     'uglify',
     'rev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'jade'
   ]);
 
   grunt.registerTask('default', [
     'newer:jshint',
     'test',
-    'build'
+    'build',
+    'jade'
   ]);
 };
