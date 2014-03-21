@@ -26,6 +26,10 @@ Created by ben.nelson on 2/14/14.
       </div>
       <div class="users">
         <div ng-repeat="user in users" class="user">{{ user.name }}
+          <form name="editUser"></form>
+          <input type="text" name="name" ng-model="name" placeholder="Name">
+          <input type="text" ng-model="lastWin" placeholder="Last Win">
+          <button ng-click="console.log($index)" class="btn">Edit User</button>
           <button ng-click="removeUser(user.name)" class="btn btn-danger">Remove User</button>
         </div>
         <div class="userManagement"></div>
@@ -33,7 +37,7 @@ Created by ben.nelson on 2/14/14.
           <input type="text" name="name" ng-model="name" placeholder="Name" required>
           <input type="text" ng-model="lastWin" placeholder="Last Win">
           <button ng-disabled="!userInput.name.$valid" ng-click="addUser({ name: name, lastWin: lastWin })" class="btn btn-primary">Add User</button>
-          <p><small ng-show="!userInput.name.$valid || errorMessage">{{ errorMessage }}</small></p>
+          <p><small ng-show="errorMessage">{{ errorMessage }}</small></p>
         </form>
       </div>
     </div>

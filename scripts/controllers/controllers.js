@@ -6,26 +6,36 @@ ticketpicker.controller('main', ["$dateService", "$scope", function($dateService
     $scope.errorMessage = "";
 
     $scope.addUser = function(user){
-        $scope.errorMessage = "";        
-        var nameIsUnique = this.users.every(function isUnique(element){
-                                  return element.name != user.name;
-                              });
-        var nameIsNotBlank = user.name != "" && user.name != null;      
-        var validWinDate = $dateService.validateDate(user.lastWin);
+        if(this.validUser(user))
+            this.users.push(user);
+    }
 
-        if(!nameIsUnique || !validWinDate || !nameIsNotBlank)
-        {
-          this.setErrorMessage(nameIsUnique, nameIsNotBlank, validWinDate);
-          return;
-        }
-
-        this.users.push(user);
+    $scope.editUser = function($index, user){
+        $scope.users[$index] = user;
     }
 
     $scope.removeUser = function(userName){
         $scope.users = this.users.filter(function(element){
             return element.name != userName;
         });
+    }
+
+
+    $scope.validUser = function(user){
+      this.errorMessage = "";        
+      var nameIsUnique = this.users.every(function isUnique(element){
+                              return element.name != user.name;
+                           });
+      var nameIsNotBlank = user.name != "" && user.name != null;      
+      var validWinDate = $dateService.validateDate(user.lastWin);
+
+      if(!nameIsUnique || !validWinDate || !nameIsNotBlank)
+      {
+        this.setErrorMessage(nameIsUnique, nameIsNotBlank, validWinDate);
+        return false;
+      }
+
+      return true;
     }
 
     //could potentially do some cool error building with this
@@ -46,7 +56,7 @@ ticketpicker.controller('main', ["$dateService", "$scope", function($dateService
 
         if(!dateValid)
         {
-          $scope.errorMessage += "Please input a valid date.\n<br/>";
+          $scope.errorMessage += "Please input a valid date.<br/>";
         }
     }
 }]);

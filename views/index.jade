@@ -25,6 +25,11 @@ html(lang="en", ng-app="ticketpicker")
            div.users
             .user(ng-repeat='user in users')
                 {{ user.name }}
+                form(name="editUser")
+                input(type="text", name="name", ng-model="name", placeholder="Name")
+                input(type="text", ng-model="lastWin", placeholder="Last Win")
+                button(ng-click="editUser($index, { name: name, lastWin: lastWin })", class="btn") Edit User
+  
                 button(ng-click="removeUser(user.name)", class="btn btn-danger") Remove User
             .userManagement
             form(name="userInput")
