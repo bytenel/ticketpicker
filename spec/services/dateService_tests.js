@@ -19,7 +19,7 @@ module('dateService', date_init);
        ok(result);
     });
 
-    test("accepts valid m/d/yyyy dates", function(){
+    test("accepts valid dates", function(){
         // arrange
         var validDate = "1/2/2013";
 
@@ -27,12 +27,23 @@ module('dateService', date_init);
         var result = this.$service.validateDate(validDate);
 
         // assert
-        ok(result, "should not fail a valid m/d/yyyy date");
+        ok(result, "should not fail a valid date");
     });
 
     test("rejects numbers", function(){
         // arrange
         var invalidDate = "123";
+
+        // act
+        var result = this.$service.validateDate(invalidDate);
+
+        // assert
+        equal(result, false, "should not allow numbers as strings to be considered dates");
+    });
+
+    test("rejects garbage", function(){
+        // arrange
+        var invalidDate = "-*/-*/*-";
 
         // act
         var result = this.$service.validateDate(invalidDate);

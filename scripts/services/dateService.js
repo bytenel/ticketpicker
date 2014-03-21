@@ -3,14 +3,13 @@
  */
 ticketpicker.service("$dateService", function(){
 	this.validateDate = function(date){
-		if(date == null)
-			return true;
-
 		var pattern = /^[0-9]*$/
 		if(pattern.test(date))
 			return false;
 
-		if(!isNaN(Date.parse(date)))
+		if(date == null || !isNaN(Date.parse(date)))
 			return true;
+
+	  return false;
 	}
 });

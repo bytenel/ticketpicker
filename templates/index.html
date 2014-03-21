@@ -11,6 +11,7 @@ Created by ben.nelson on 2/14/14.
     <script type="text/javascript" src="../app/bower_components/angular-resource/angular-resource.js"></script>
     <script type="text/javascript" src="../scripts/app.js"></script>
     <script type="text/javascript" src="../scripts/services/database.js"></script>
+    <script type="text/javascript" src="../scripts/services/dateService.js"></script>
     <script type="text/javascript" src="../scripts/controllers/controllers.js"></script>
     <link rel="stylesheet" href="style/base.css">
     <link rel="stylesheet" href="../app/bower_components/bootstrap/dist/css/bootstrap.css">
@@ -32,7 +33,7 @@ Created by ben.nelson on 2/14/14.
           <input type="text" name="name" ng-model="name" placeholder="Name" required>
           <input type="text" ng-model="lastWin" placeholder="Last Win">
           <button ng-disabled="!userInput.name.$valid" ng-click="addUser({ name: name, lastWin: lastWin })" class="btn btn-primary">Add User</button>
-          <p><small ng-show="!userInput.name.$valid">Name for the user is required.</small></p>
+          <p><small ng-show="!userInput.name.$valid || errorMessage">{{ errorMessage }}</small></p>
         </form>
       </div>
     </div>

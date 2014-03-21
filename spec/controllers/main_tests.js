@@ -93,7 +93,7 @@ var users_init = {
         //assert
         ok(this.$scope.users);
         equal(this.$scope.users.length, users.length);
-        equal(this.$scope.errorMessage, "Please input a valid date (mm-dd-yyyy).<br/>");
+        equal(this.$scope.errorMessage, "Please input a valid date.<br/>");
     });
 
     test("display an error if attempting to insert a invalid date", function(){
@@ -106,7 +106,7 @@ var users_init = {
         //assert
         ok(this.$scope.users);
         equal(this.$scope.users.length, users.length);
-        equal(this.$scope.errorMessage, "Please input a valid date (mm-dd-yyyy).<br/>");
+        equal(this.$scope.errorMessage, "Please input a valid date.<br/>");
     });
 
      test("display an error if attempting to insert a invalid name", function(){
@@ -120,4 +120,61 @@ var users_init = {
         ok(this.$scope.users);
         equal(this.$scope.users.length, users.length);
         equal(this.$scope.errorMessage, "Please input a name.<br/>");
+    });
+
+    test("clear errors if you fix the problem with a blank name", function(){
+        // arrange
+        var users = [{name: "null", wins: [], lastWin: "1/2/2013"}];
+        this.$scope.addUser({name: null, wins: [], lastWin: "1/2/2013"});
+
+        // act
+        this.$scope.addUser({name: "null", wins: [], lastWin: "1/2/2013"}); 
+
+        //assert        
+        ok(this.$scope.users);
+        equal(this.$scope.users.length, users.length);        
+        equal(this.$scope.errorMessage, "");
+    });
+
+    test("clear errors if you fix the problem with a unique name", function(){
+        // arrange
+        var users = [{name: "null", wins: [], lastWin: "1/2/2013"}, {name: "test", wins: [], lastWin: "1/2/2013"}];
+        this.$scope.addUser({name: "null", wins: [], lastWin: "1/2/2013"}); 
+        this.$scope.addUser({name: "null", wins: [], lastWin: "1/2/2013"});
+
+        // act
+        this.$scope.addUser({name: "test", wins: [], lastWin: "1/2/2013"});
+
+        //assert        
+        ok(this.$scope.users);
+        equal(this.$scope.users.length, users.length);        
+        equal(this.$scope.errorMessage, "");
+    });
+
+    test("clear errors if you fix the problem with a nondate", function(){
+      // arrange
+      var users = [{name: "null", wins: [], lastWin: "1/2/2013"}];
+      this.$scope.addUser({name: "null", wins: [], lastWin: '123'}); 
+
+      // act
+      this.$scope.addUser({name: "null", wins: [], lastWin: "1/2/2013"});
+
+      //assert        
+      ok(this.$scope.users);
+      equal(this.$scope.users.length, users.length);        
+      equal(this.$scope.errorMessage, "");
+    });
+
+     test("clear errors if you fix the problem with a garbage date", function(){
+      // arrange
+      var users = [{name: "null", wins: [], lastWin: "1/2/2013"}];
+      this.$scope.addUser({name: "null", wins: [], lastWin: '/-*/-*/'}); 
+
+      // act
+      this.$scope.addUser({name: "null", wins: [], lastWin: "1/2/2013"});
+
+      //assert        
+      ok(this.$scope.users);
+      equal(this.$scope.users.length, users.length);        
+      equal(this.$scope.errorMessage, "");
     });

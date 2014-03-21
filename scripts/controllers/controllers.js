@@ -6,6 +6,7 @@ ticketpicker.controller('main', ["$dateService", "$scope", function($dateService
     $scope.errorMessage = "";
 
     $scope.addUser = function(user){
+        $scope.errorMessage = "";        
         var nameIsUnique = this.users.every(function isUnique(element){
                                   return element.name != user.name;
                               });
@@ -45,7 +46,7 @@ ticketpicker.controller('main', ["$dateService", "$scope", function($dateService
 
         if(!dateValid)
         {
-          $scope.errorMessage += "Please input a valid date (mm-dd-yyyy).<br/>";
+          $scope.errorMessage += "Please input a valid date.\n<br/>";
         }
     }
 }]);
