@@ -10,3 +10,7 @@ button{
 .unselectable{
     -webkit-user-select: none;
 }
+
+.margin-right-10{
+	margin-right: 50px;
+}

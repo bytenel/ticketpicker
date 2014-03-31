@@ -17,28 +17,33 @@ Created by ben.nelson on 2/14/14.
     <link rel="stylesheet" href="../app/bower_components/bootstrap/dist/css/bootstrap.css">
   </head>
   <body class="unselectable">
-    <div ng-controller="main" class="col-xs-12">
-      <div class="col-xs-4">
+    <div ng-controller="main" class="row">
+      <div class="col-xs-6">
         <h1>Users</h1>
-      </div>
-      <div class="col-xs-8">
-        <button type="button" aria-hidden="true" onclick="quit()" class="close">&times</button>
-      </div>
-      <div class="users">
-        <div ng-repeat="user in users" class="user">{{ user.name }}
-          <form name="editUser"></form>
-          <input type="text" name="name" ng-model="name" placeholder="Name">
-          <input type="text" ng-model="lastWin" placeholder="Last Win">
-          <button ng-click="console.log($index)" class="btn">Edit User</button>
-          <button ng-click="removeUser(user.name)" class="btn btn-danger">Remove User</button>
+        <hr>
+        <div class="row">
+          <div class="users col-xs-12">
+            <div ng-repeat="user in users" class="user">
+              <div class="row">
+                <div class="col-xs-12">{{ user.name }} - {{ user.lastWin }}                
+                  <button ng-click="removeUser(user.name)" class="btn btn-danger pull-right margin-right-10">Remove User</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="userManagement"></div>
-        <form name="userInput">
-          <input type="text" name="name" ng-model="name" placeholder="Name" required>
-          <input type="text" ng-model="lastWin" placeholder="Last Win">
-          <button ng-disabled="!userInput.name.$valid" ng-click="addUser({ name: name, lastWin: lastWin })" class="btn btn-primary">Add User</button>
+      </div>
+      <div class="col-xs-6">     
+        <div class="userManagement row col-xs-12">
+          <form name="userInput">
+            <input type="text" name="name" ng-model="name" placeholder="Name" required class="inline form-control">
+            <input type="text" ng-model="lastWin" placeholder="Last Win" class="inline form-control pull-right">
+          </form>
+        </div>
+        <div class="row col-xs-12">
+          <button ng-disabled="!userInput.name.$valid" ng-click="addUser({ name: name, lastWin: lastWin })" class="btn btn-primary pull-right margin-right-10">Add User</button>
           <p><small ng-show="errorMessage">{{ errorMessage }}</small></p>
-        </form>
+        </div>
       </div>
     </div>
   </body>

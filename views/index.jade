@@ -16,26 +16,25 @@ html(lang="en", ng-app="ticketpicker")
         link(rel='stylesheet', href='style/base.css')
         link(rel='stylesheet', href='../app/bower_components/bootstrap/dist/css/bootstrap.css')
     body.unselectable
-       .col-xs-12(ng-controller="main")
-           div.col-xs-4
+       .row(ng-controller="main")
+           div.col-xs-6
             h1 Users
+            hr
+            .row
+             .users.col-xs-12
+              .user(ng-repeat='user in users')
+                .row
+                  .col-xs-12
+                      {{ user.name }} - {{ user.lastWin }}                
+                      button(ng-click="removeUser(user.name)", class="btn btn-danger pull-right margin-right-10") Remove User
 
-           div.col-xs-8
-            button(type='button', class='close', aria-hidden='true', onclick='quit()').&times
-           div.users
-            .user(ng-repeat='user in users')
-                {{ user.name }}
-                form(name="editUser")
-                input(type="text", name="name", ng-model="name", placeholder="Name")
-                input(type="text", ng-model="lastWin", placeholder="Last Win")
-                button(ng-click="editUser($index, { name: name, lastWin: lastWin })", class="btn") Edit User
-  
-                button(ng-click="removeUser(user.name)", class="btn btn-danger") Remove User
-            .userManagement
-            form(name="userInput")
-                input(type="text", name="name", ng-model="name", placeholder="Name", required)
-                input(type="text", ng-model="lastWin", placeholder="Last Win")
-                button(ng-disabled="!userInput.name.$valid" ng-click="addUser({ name: name, lastWin: lastWin })", class="btn btn-primary") Add User
-                p
-                    small(ng-show="errorMessage") {{ errorMessage }}
+           div.col-xs-6      
+              .userManagement.row.col-xs-12
+                form(name="userInput")
+                    input(type="text", name="name", ng-model="name", placeholder="Name", class="form-control" required)
+                    input(type="text", ng-model="lastWin", placeholder="Last Win", class="form-control pull")
+              .row.col-xs-12
+                    button(ng-disabled="!userInput.name.$valid" ng-click="addUser({ name: name, lastWin: lastWin })", class="btn btn-primary pull-right margin-right-10") Add User
+                    p
+                      small(ng-show="errorMessage") {{ errorMessage }}
 
