@@ -178,3 +178,16 @@ var users_init = {
       equal(this.$scope.users.length, users.length);        
       equal(this.$scope.errorMessage, "");
     });
+
+     test("allows blank dates", function(){
+      // arrange
+      var users = [{name: "null", wins: [], lastWin: " "}];
+
+      // act
+      this.$scope.addUser({name: "null", wins: [], lastWin: ' '}); 
+
+      //assert        
+      ok(this.$scope.users);
+      equal(this.$scope.users.length, users.length);        
+      equal(this.$scope.errorMessage, "");
+    });

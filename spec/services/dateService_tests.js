@@ -28,6 +28,7 @@ module('dateService', date_init);
 
         // assert
         ok(result, "should not fail a valid date");
+        equal(result, true);
     });
 
     test("rejects numbers", function(){
@@ -49,5 +50,39 @@ module('dateService', date_init);
         var result = this.$service.validateDate(invalidDate);
 
         // assert
-        equal(result, false, "should not allow numbers as strings to be considered dates");
+        equal(result, false, "should not allow garbage strings to be considered dates");
+    });
+
+    test("rejects invalid formatting with only having one section", function(){
+        // arrange
+        var invalidDate = "1/";
+
+        // act
+        var result = this.$service.validateDate(invalidDate);
+
+        // assert
+        equal(result, false, "allowed 1/");
+    });
+
+
+    test("rejects invalid formatting with only having two sections", function(){
+        // arrange
+        var invalidDate = "1/2/";
+
+        // act
+        var result = this.$service.validateDate(invalidDate);
+
+        // assert
+        equal(result, false, "allowed 1/2/");
+    });
+
+    test("rejects a slash", function(){
+        // arrange
+        var invalidDate = "/";
+
+        // act
+        var result = this.$service.validateDate(invalidDate);
+
+        // assert
+        equal(result, false, "allowed /");
     });

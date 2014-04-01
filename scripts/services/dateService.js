@@ -3,9 +3,9 @@
  */
 ticketpicker.service("$dateService", function(){
 	this.validateDate = function(date){
-		var pattern = /^[0-9]*$/
-		if(pattern.test(date))
-			return false;
+		var correctFormat = /^[0-9]+\/[0-9]+\/[0-9][0-9]*$/	
+		if(!correctFormat.test(date) && date != null)
+			return false; 
 
 		if(date == null || !isNaN(Date.parse(date)))
 			return true;

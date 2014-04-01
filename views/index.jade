@@ -31,7 +31,7 @@ html(lang="en", ng-app="ticketpicker")
               .user(ng-repeat='user in users')
                 .row
                   .col-xs-12                    
-                      span(ng-if='!user.edit' ng-click="applyEdit($index)") {{ user.name }} - {{ user.lastWin }}                
+                      span(ng-if='!user.edit' ng-click="applyEdit($index)") {{ user.name }} {{ user.lastWin }}                
                       button(ng-click="removeUser(user.name)", class="btn btn-danger pull-right margin-right-10") Remove User
                       div(ng-include="'edit_form'", ng-if="user.edit")
 
