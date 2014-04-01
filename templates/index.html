@@ -13,8 +13,15 @@ Created by ben.nelson on 2/14/14.
     <script type="text/javascript" src="../scripts/services/database.js"></script>
     <script type="text/javascript" src="../scripts/services/dateService.js"></script>
     <script type="text/javascript" src="../scripts/controllers/controllers.js"></script>
-    <link rel="stylesheet" href="style/base.css">
+    <link rel="stylesheet" href="../views/style/base.css">
     <link rel="stylesheet" href="../app/bower_components/bootstrap/dist/css/bootstrap.css">
+    <script type="text/ng-template" id="edit_form">
+      <form name="editUser">
+        <input type="text" name="name" ng-model="user.name" placeholder="Name">
+        <input type="text" ng-model="user.lastWin" placeholder="Last Win">
+      </form>
+      <button ng-click="$parent.editUser($index, { name: user.name, lastWin: user.lastWin })" class="btn">Save</button>
+    </script>
   </head>
   <body class="unselectable">
     <div ng-controller="main" class="row">
@@ -25,8 +32,9 @@ Created by ben.nelson on 2/14/14.
           <div class="users col-xs-12">
             <div ng-repeat="user in users" class="user">
               <div class="row">
-                <div class="col-xs-12">{{ user.name }} - {{ user.lastWin }}                
+                <div class="col-xs-12">                   <span ng-if="!user.edit" ng-click="applyEdit($index)">{{ user.name }} - {{ user.lastWin }}                </span>
                   <button ng-click="removeUser(user.name)" class="btn btn-danger pull-right margin-right-10">Remove User</button>
+                  <div ng-include="'edit_form'" ng-if="user.edit"></div>
                 </div>
               </div>
             </div>
@@ -36,8 +44,8 @@ Created by ben.nelson on 2/14/14.
       <div class="col-xs-6">     
         <div class="userManagement row col-xs-12">
           <form name="userInput">
-            <input type="text" name="name" ng-model="name" placeholder="Name" required class="inline form-control">
-            <input type="text" ng-model="lastWin" placeholder="Last Win" class="inline form-control pull-right">
+            <input type="text" name="name" ng-model="name" placeholder="Name" required class="form-control">
+            <input type="text" ng-model="lastWin" placeholder="Last Win" class="form-control">
           </form>
         </div>
         <div class="row col-xs-12">

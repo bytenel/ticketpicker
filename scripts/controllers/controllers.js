@@ -11,7 +11,9 @@ ticketpicker.controller('main', ["$dateService", "$scope", function($dateService
     }
 
     $scope.editUser = function($index, user){
-        $scope.users[$index] = user;
+        user.edit = false;
+        if(this.validUser(user, true))
+          $scope.users[$index] = user;
     }
 
     $scope.removeUser = function(userName){
@@ -20,12 +22,15 @@ ticketpicker.controller('main', ["$dateService", "$scope", function($dateService
         });
     }
 
+    $scope.applyEdit = function($index){
+        $scope.users[$index].edit = true;
+    }
 
-    $scope.validUser = function(user){
+    $scope.validUser = function(user, isEdit){
       this.errorMessage = "";        
-      var nameIsUnique = this.users.every(function isUnique(element){
+      var nameIsUnique = (this.users.every(function isUnique(element){
                               return element.name != user.name;
-                           });
+                           }) || isEdit);
       var nameIsNotBlank = user.name != "" && user.name != null;      
       var validWinDate = $dateService.validateDate(user.lastWin);
 
