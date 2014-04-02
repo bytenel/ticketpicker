@@ -9,6 +9,7 @@ Created by ben.nelson on 2/14/14.
     <script type="text/javascript" src="../scripts/viewmodel/baseUI.js"></script>
     <script type="text/javascript" src="../app/bower_components/angular/angular.js"></script>
     <script type="text/javascript" src="../app/bower_components/angular-resource/angular-resource.js"></script>
+    <script type="text/javascript" src="../app/bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script type="text/javascript" src="../scripts/app.js"></script>
     <script type="text/javascript" src="../scripts/services/database.js"></script>
     <script type="text/javascript" src="../scripts/services/dateService.js"></script>
@@ -50,7 +51,7 @@ Created by ben.nelson on 2/14/14.
         </div>
         <div class="row col-xs-12">
           <button ng-disabled="!userInput.name.$valid" ng-click="addUser({ name: name, lastWin: lastWin })" class="btn btn-primary pull-right margin-right-10">Add User</button>
-          <p><small ng-show="errorMessage">{{ errorMessage }}</small></p>
+          <p><small ng-show="errorMessage" ng-bind-html="errorMessage"></small></p>
         </div>
       </div>
     </div>

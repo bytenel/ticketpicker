@@ -1,6 +1,10 @@
 TODO: 
 -finish some ui work
--verify dates
 -add random alg
 -add pick winner
 -update winner in memory
+-push to mongo
+-pull from mongo on startup
+-active directory to load everybody?
+-requirejs for all required scripts
+-bug fixes
