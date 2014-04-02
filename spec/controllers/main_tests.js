@@ -191,3 +191,17 @@ var users_init = {
       equal(this.$scope.users.length, users.length);        
       equal(this.$scope.errorMessage, "");
     });
+
+
+    test("allows undefined dates", function(){
+      // arrange
+      var users = [{ name: "null", wins: [], lastWin: undefined }];
+
+      // act
+      this.$scope.addUser({ name: "null", wins: [], lastWin: undefined }); 
+
+      //assert        
+      ok(this.$scope.users);
+      equal(this.$scope.users.length, users.length);        
+      equal(this.$scope.errorMessage, "");
+    });

@@ -8,3 +8,4 @@ TODO:
 -active directory to load everybody?
 -requirejs for all required scripts
 -bug fixes
+-put everything through a jslinter

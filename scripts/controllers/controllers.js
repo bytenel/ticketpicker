@@ -32,7 +32,7 @@ ticketpicker.controller('main', ["$dateService", "$scope", function($dateService
                               return element.name != user.name;
                            }) || isEdit);
       var nameIsNotBlank = user.name != "" && user.name != null;      
-      var validWinDate = ($dateService.validateDate(user.lastWin) || user.lastWin == " ");
+      var validWinDate = ($dateService.validateDate(user.lastWin) || (user.lastWin == " " || user.lastWin == undefined));
 
       if(!nameIsUnique || !validWinDate || !nameIsNotBlank)
       {
