@@ -1,7 +1,7 @@
 /**
  * Created by ben.nelson on 2/21/14.
  */
-ticketpicker.controller('main', ["$dateService", "$scope", function($dateService, $scope){
+ticketpicker.controller('main', ["$randomPicker", "$dateService", "$scope", function($randomPicker, $dateService, $scope){
     $scope.users = [];
     $scope.errorMessage = "";
 

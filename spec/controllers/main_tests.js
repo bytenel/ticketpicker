@@ -5,18 +5,17 @@ test("base test", function(){
     ok(1 == "1", "Test framework works!");
 });
 
-//mocks still need definitions...
-var $mockDataContext = {};
-
 var users_init = {
        setup: function() {
+           var injector = angular.injector(['ticketpicker']);
            this.$scope = injector.get('$rootScope').$new();
-           this.$datacontext = $mockDataContext;
            this.$dateService = injector.get('$dateService'); 
+           this.$randomPicker = injector.get('$randomPicker'); 
            var $controller = injector.get('$controller');
            $controller('main', {
+                $randomPicker: this.$randomPicker,
                 $dateService: this.$dateService,
-                $scope: this.$scope      
+                $scope: this.$scope    
            });                 
        },
        teardown: function() {
@@ -24,11 +23,10 @@ var users_init = {
    };
 
  module('users', users_init);
-    var injector = angular.injector(['ticketpicker']);
 
      test("exist", function(){
         // arrange
-       
+
         // act
         var users = this.$scope.users;
 
@@ -204,4 +202,15 @@ var users_init = {
       ok(this.$scope.users);
       equal(this.$scope.users.length, users.length);        
       equal(this.$scope.errorMessage, "");
+    });
+
+module('winners', users_init);
+
+       test("picks a winner", function(){
+      // arrange
+ 
+      // act
+    
+      //assert  
+      expect(0);  // not implemented yet      
     });
