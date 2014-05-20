@@ -4,6 +4,7 @@
 ticketpicker.controller('main', ["$randomPicker", "$dateService", "$scope", function($randomPicker, $dateService, $scope){
     $scope.users = [];
     $scope.errorMessage = "";
+    $scope.winner = undefined;
 
     $scope.addUser = function(user){
         if(this.validUser(user))
@@ -63,5 +64,15 @@ ticketpicker.controller('main', ["$randomPicker", "$dateService", "$scope", func
         {
           $scope.errorMessage += "Please input a valid date.<br/>";
         }
+    }
+
+    $scope.pickWinner = function(){
+        var winner = $randomPicker.select(this.users);
+        var d =  new Date();
+        var date = d.getDate();
+        var month = d.getMonth() + 1;
+        var year = d.getFullYear();
+        winner.lastWin = month + "/" + date + "/" + year;
+        this.winner = winner;
     }
 }]);

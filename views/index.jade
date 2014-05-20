@@ -9,6 +9,7 @@ html(lang="en", ng-app="ticketpicker")
         script(type='text/javascript', src='../app/bower_components/angular/angular.js')
         script(type='text/javascript', src='../app/bower_components/angular-resource/angular-resource.js')
         script(type='text/javascript', src='../app/bower_components/angular-sanitize/angular-sanitize.js')
+        script(type='text/javascript', src='../node_modules/moment/moment.js')
         script(type='text/javascript', src='../scripts/app.js')
         script(type='text/javascript', src='../scripts/services/database.js')
         script(type='text/javascript', src='../scripts/services/dateService.js')
@@ -29,10 +30,14 @@ html(lang="en", ng-app="ticketpicker")
             hr
             .row
              .users.col-xs-12
+              .winner(ng-show="winner != undefined") Winner: {{ winner.name }}
+              hr(ng-show="winner != undefined")
+              b Name | Last Win
+              br    
               .user(ng-repeat='user in users')
                 .row
-                  .col-xs-12                    
-                      span(ng-if='!user.edit', ng-click="applyEdit($index)") {{ user.name }} {{ user.lastWin }}                
+                  .col-xs-12        
+                      span(ng-if='!user.edit', ng-click="applyEdit($index)") {{ user.name }} | {{ user.lastWin }}                
                       button(ng-click="removeUser(user.name)", class="btn btn-danger pull-right margin-right-10") Remove User
                       div(ng-include="'edit_form'", ng-if="user.edit")
            div.col-xs-6      
@@ -41,6 +46,7 @@ html(lang="en", ng-app="ticketpicker")
                     input(type="text", name="name", ng-model="name", placeholder="Name", class="form-control", required)
                     input(type="text", ng-model="lastWin", placeholder="Last Win", class="form-control")
               .row.col-xs-12
+                    button(ng-click="pickWinner()", class="btn btn-primary pull-right margin-right-10") Pick Winner
                     button(ng-disabled="!userInput.name.$valid", ng-click="addUser({ name: name, lastWin: lastWin })", class="btn btn-primary pull-right margin-right-10") Add User
                     p
                       small(ng-show="errorMessage", ng-bind-html='errorMessage')

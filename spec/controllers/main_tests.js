@@ -206,11 +206,29 @@ var users_init = {
 
 module('winners', users_init);
 
-       test("picks a winner", function(){
+     test("picks a winner", function(){
       // arrange
- 
+      var users = [{ name: "null", wins: [], lastWin: undefined }];
+      this.$scope.addUser({ name: "null", wins: [], lastWin: undefined }); 
+      
       // act
-    
+       this.$scope.pickWinner();
+
       //assert  
-      expect(0);  // not implemented yet      
+       ok(this.$scope.winner, "Winner should not be undefined.");
+    });
+
+    test("updates winner last win date", function(){
+      // arrange
+      var users = [{ name: "null", wins: [], lastWin: undefined }];
+      this.$scope.addUser({ name: "null", wins: [], lastWin: undefined }); 
+      
+      // act
+       this.$scope.pickWinner();
+       winner = this.$scope.winner;
+       orgUser = this.$scope.users[0];
+
+      //assert  
+       deepEqual(this.$scope.winner, orgUser, "Winner should be same as orginal user.");
+       notEqual(orgUser.lastWin, undefined, "Winner should have updated win date.")
     });

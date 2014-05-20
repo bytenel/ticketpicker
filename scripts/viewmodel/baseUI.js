@@ -4,7 +4,6 @@
  * https://github.com/rogerwang/node-webkit/wiki/Native-UI-API-Manual
  */
 var gui = require('nw.gui');
-
 var menu = new gui.Menu();
 
 function quit()

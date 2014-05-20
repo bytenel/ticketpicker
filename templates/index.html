@@ -9,6 +9,7 @@
     <script type="text/javascript" src="../app/bower_components/angular/angular.js"></script>
     <script type="text/javascript" src="../app/bower_components/angular-resource/angular-resource.js"></script>
     <script type="text/javascript" src="../app/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script type="text/javascript" src="../node_modules/moment/moment.js"></script>
     <script type="text/javascript" src="../scripts/app.js"></script>
     <script type="text/javascript" src="../scripts/services/database.js"></script>
     <script type="text/javascript" src="../scripts/services/dateService.js"></script>
@@ -31,9 +32,11 @@
         <hr>
         <div class="row">
           <div class="users col-xs-12">
+            <div ng-show="winner != undefined" class="winner">Winner: {{ winner.name }}</div>
+            <hr ng-show="winner != undefined"><b>Name | Last Win</b><br>
             <div ng-repeat="user in users" class="user">
               <div class="row">
-                <div class="col-xs-12">                   <span ng-if="!user.edit" ng-click="applyEdit($index)">{{ user.name }} {{ user.lastWin }}                </span>
+                <div class="col-xs-12">       <span ng-if="!user.edit" ng-click="applyEdit($index)">{{ user.name }} | {{ user.lastWin }}                </span>
                   <button ng-click="removeUser(user.name)" class="btn btn-danger pull-right margin-right-10">Remove User</button>
                   <div ng-include="'edit_form'" ng-if="user.edit"></div>
                 </div>
@@ -50,6 +53,7 @@
           </form>
         </div>
         <div class="row col-xs-12">
+          <button ng-click="pickWinner()" class="btn btn-primary pull-right margin-right-10">Pick Winner</button>
           <button ng-disabled="!userInput.name.$valid" ng-click="addUser({ name: name, lastWin: lastWin })" class="btn btn-primary pull-right margin-right-10">Add User</button>
           <p><small ng-show="errorMessage" ng-bind-html="errorMessage"></small></p>
         </div>
