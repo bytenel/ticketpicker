@@ -10,9 +10,11 @@ var users_init = {
            var injector = angular.injector(['ticketpicker']);
            this.$scope = injector.get('$rootScope').$new();
            this.$dateService = injector.get('$dateService'); 
-           this.$randomPicker = injector.get('$randomPicker'); 
+           this.$randomPicker = injector.get('$randomPicker');
+           this.$ad = injector.get("$ad");
            var $controller = injector.get('$controller');
            $controller('main', {
+                $ad: this.$ad,
                 $randomPicker: this.$randomPicker,
                 $dateService: this.$dateService,
                 $scope: this.$scope    
