@@ -19,6 +19,17 @@ module('dateService', date_init);
        ok(result);
     });
 
+      test("accepts blank", function(){
+        // arrange
+        var validDate = " ";
+
+        // act
+        var result = this.$service.validateDate(validDate);
+ 
+        // assert
+       ok(result);
+    });
+
     test("accepts valid dates", function(){
         // arrange
         var validDate = "1/2/2013";
