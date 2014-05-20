@@ -5,7 +5,6 @@ doctype html
 html(lang="en", ng-app="ticketpicker")
     head
         title= "Ticket Picker"
-
         script(type='text/javascript', src='../scripts/viewmodel/baseUI.js')
         script(type='text/javascript', src='../app/bower_components/angular/angular.js')
         script(type='text/javascript', src='../app/bower_components/angular-resource/angular-resource.js')
@@ -33,18 +32,16 @@ html(lang="en", ng-app="ticketpicker")
               .user(ng-repeat='user in users')
                 .row
                   .col-xs-12                    
-                      span(ng-if='!user.edit' ng-click="applyEdit($index)") {{ user.name }} {{ user.lastWin }}                
+                      span(ng-if='!user.edit', ng-click="applyEdit($index)") {{ user.name }} {{ user.lastWin }}                
                       button(ng-click="removeUser(user.name)", class="btn btn-danger pull-right margin-right-10") Remove User
                       div(ng-include="'edit_form'", ng-if="user.edit")
-
-
            div.col-xs-6      
               .userManagement.row.col-xs-12
                 form(name="userInput")
-                    input(type="text", name="name", ng-model="name", placeholder="Name", class="form-control" required)
+                    input(type="text", name="name", ng-model="name", placeholder="Name", class="form-control", required)
                     input(type="text", ng-model="lastWin", placeholder="Last Win", class="form-control")
               .row.col-xs-12
-                    button(ng-disabled="!userInput.name.$valid" ng-click="addUser({ name: name, lastWin: lastWin })", class="btn btn-primary pull-right margin-right-10") Add User
+                    button(ng-disabled="!userInput.name.$valid", ng-click="addUser({ name: name, lastWin: lastWin })", class="btn btn-primary pull-right margin-right-10") Add User
                     p
-                      small(ng-show="errorMessage" ng-bind-html='errorMessage')
+                      small(ng-show="errorMessage", ng-bind-html='errorMessage')
 
