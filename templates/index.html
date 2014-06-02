@@ -9,9 +9,10 @@
     <script type="text/javascript" src="../app/bower_components/angular/angular.js"></script>
     <script type="text/javascript" src="../app/bower_components/angular-resource/angular-resource.js"></script>
     <script type="text/javascript" src="../app/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script type="text/javascript" src="../app/bower_components/underscore/underscore.js"></script>
     <script type="text/javascript" src="../node_modules/moment/moment.js"></script>
-    <script type="text/javascript" src="../scripts/app.js"></script>
-    <script type="text/javascript" src="../scripts/services/database.js"></script>
+    <script type="text/javascript" src="../scripts/server/server.js"></script>
+    <script type="text/javascript" src="../scripts/app.js">       </script>
     <script type="text/javascript" src="../scripts/services/dateService.js"></script>
     <script type="text/javascript" src="../scripts/services/randomPicker.js"></script>
     <script type="text/javascript" src="../scripts/controllers/controllers.js"></script>
@@ -35,8 +36,8 @@
             <div ng-show="winner != undefined" class="winner">Winner: {{ winner.name }}</div>
             <hr ng-show="winner != undefined"><b>Name | Last Win</b><br>
             <div ng-repeat="user in users" class="user">
-              <div class="row">
-                <div class="col-xs-12">       <span ng-if="!user.edit" ng-click="applyEdit($index)">{{ user.name }} | {{ user.lastWin }}                </span>
+              <div class="row {{ $index % 2 ? &quot;even&quot; : &quot;odd&quot; }}">
+                <div class="col-xs-12">       <span ng-if="!user.edit" ng-click="applyEdit($index)">{{ user.name }} | {{ user.lastWin || "Not a winner" }}                </span>
                   <button ng-click="removeUser(user.name)" class="btn btn-danger pull-right margin-right-10">Remove User</button>
                   <div ng-include="'edit_form'" ng-if="user.edit"></div>
                 </div>

@@ -31,7 +31,8 @@ module.exports = function(config) {
     // list of files to exclude
     exclude: [
       'karma.config.js',
-      'scripts/viewmodel/baseUI.js'
+      'scripts/viewmodel/baseUI.js',
+      'scripts/server/server.js'
     ],
 
 

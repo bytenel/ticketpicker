@@ -1,10 +1,32 @@
 /**
  * Created by ben.nelson on 2/21/14.
  */
-ticketpicker.controller('main', ["$datacontext", "$randomPicker", "$dateService", "$scope", function($datacontext, $randomPicker, $dateService, $scope){
+ticketpicker.controller('main', ["$http","$randomPicker", "$dateService", "$scope", function($http, $randomPicker, $dateService, $scope){
     $scope.users = [];
     $scope.errorMessage = "";
     $scope.winner = undefined;
+
+    $scope.load = function(){
+     $http.get('http://localhost:2080/api/users')
+       .success(function(data) {
+         if(data.status)
+         {
+            console.log(data);
+            window.setTimeout($scope.load, 1000);
+         }
+         else{
+          var allUsers = _.union($scope.users,data);
+          var finalUsers = _.uniq(allUsers);
+          $scope.users = finalUsers;
+          console.log(data);
+         }
+       })
+       .error(function(data) {
+           console.log('Error: ' + data);
+      });
+   }
+
+   $scope.load();
 
     $scope.addUser = function(user){
         if(this.validUser(user))
@@ -32,9 +54,8 @@ ticketpicker.controller('main', ["$datacontext", "$randomPicker", "$dateService"
       var nameIsUnique = (this.users.every(function isUnique(element){
                               return element.name != user.name;
                            }) || isEdit);
-      var nameIsNotBlank = user.name != "" && user.name != null;      
-      var validWinDate = ($dateService.validateDate(user.lastWin) || (user.lastWin == " " || user.lastWin == undefined));
-
+      var nameIsNotBlank = user.name != "" && user.name != null;   
+      var validWinDate = ($dateService.validateDate(user.lastWin));   
       if(!nameIsUnique || !validWinDate || !nameIsNotBlank)
       {
         this.setErrorMessage(nameIsUnique, nameIsNotBlank, validWinDate);

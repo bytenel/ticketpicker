@@ -9,9 +9,10 @@ html(lang="en", ng-app="ticketpicker")
         script(type='text/javascript', src='../app/bower_components/angular/angular.js')
         script(type='text/javascript', src='../app/bower_components/angular-resource/angular-resource.js')
         script(type='text/javascript', src='../app/bower_components/angular-sanitize/angular-sanitize.js')
+        script(type='text/javascript', src='../app/bower_components/underscore/underscore.js')
         script(type='text/javascript', src='../node_modules/moment/moment.js')
-        script(type='text/javascript', src='../scripts/app.js')
-        script(type='text/javascript', src='../scripts/services/database.js')
+        script(type='text/javascript', src='../scripts/server/server.js')
+        script(type='text/javascript', src='../scripts/app.js')        
         script(type='text/javascript', src='../scripts/services/dateService.js')
         script(type='text/javascript', src='../scripts/services/randomPicker.js')
         script(type='text/javascript', src='../scripts/controllers/controllers.js')
@@ -35,9 +36,9 @@ html(lang="en", ng-app="ticketpicker")
               b Name | Last Win
               br    
               .user(ng-repeat='user in users')
-                .row
+                .row(class='{{ $index % 2 ? "even" : "odd" }}')
                   .col-xs-12        
-                      span(ng-if='!user.edit', ng-click="applyEdit($index)") {{ user.name }} | {{ user.lastWin }}                
+                      span(ng-if='!user.edit', ng-click="applyEdit($index)") {{ user.name }} | {{ user.lastWin || "Not a winner" }}                
                       button(ng-click="removeUser(user.name)", class="btn btn-danger pull-right margin-right-10") Remove User
                       div(ng-include="'edit_form'", ng-if="user.edit")
            div.col-xs-6      

@@ -11,7 +11,7 @@ var users_init = {
            this.$scope = injector.get('$rootScope').$new();
            this.$dateService = injector.get('$dateService'); 
            this.$randomPicker = injector.get('$randomPicker');
-           this.$ad = injector.get("$ad");
+           this.$ad =  {};
            var $controller = injector.get('$controller');
            $controller('main', {
                 $ad: this.$ad,

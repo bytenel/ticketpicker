@@ -5,6 +5,7 @@ body{
 
 button{
     -webkit-app-region: no-drag; /*so you can't drag buttons*/
+    margin: 0 !important;
 }
 
 .unselectable{
@@ -13,4 +14,24 @@ button{
 
 .margin-right-10{
 	margin-right: 10px;
+}
+
+.even{
+	background-color: #fff;
+}
+
+.odd{
+	background-color: #CCC;
+}
+
+.user{
+	padding: 0;
+}
+
+.users{
+	margin-left: 40px;
+}
+
+.col-xs-12{
+	padding: 0 !important;
 }

@@ -3,7 +3,7 @@
  */
 ticketpicker.service("$dateService", function(){
 	this.validateDate = function(date){
-		if(date == " ")
+		if(date == " " || date == undefined || date == null || date == "")
 		  return true; 
 
 		var correctFormat = /^[0-9]+\/[0-9]+\/[0-9][0-9]*$/	
