@@ -80,27 +80,22 @@ var user = mongoose.model('user', user_schema);
      } 
  });
 
-  // create user and send back all todos after creation
+  // create user and send back all users after creation
   app.post('/api/users', function(req, res) {
+    console.log(res);
     user.create(
       { name : req.body.name,
         lastWin : req.body.lastWin },
-      function(err, todo) {
+      function(err, user) {
         if (err)
-          res.send(err);
-
-        user.find(function(err, users) {
-          if (err)
-            res.send(err)
-          res.json(users);
-        });
+          res.send(err); 
     });
 
   });
 
   // delete a user
   app.delete('/api/users/:user_name', function(req, res) {
-
+      console.log(req);
       user.remove(
        {
         name : req.params.user_name
@@ -108,13 +103,6 @@ var user = mongoose.model('user', user_schema);
        function(err, todo) {
          if (err)
            res.send(err);
-
-         // get and return all the users after you delete
-         user.find(function(err, todos) {
-           if (err)
-             res.send(err)
-           res.json(todos);
-          });
       });
   });
 

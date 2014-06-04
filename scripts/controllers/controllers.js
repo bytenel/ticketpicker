@@ -6,19 +6,20 @@ ticketpicker.controller('main', ["$http","$randomPicker", "$dateService", "$scop
     $scope.errorMessage = "";
     $scope.winner = undefined;
 
-    $scope.load = function(){
+    $scope.load = function(callback){
      $http.get('http://localhost:2080/api/users')
        .success(function(data) {
          if(data.status)
          {
             console.log(data);
-            window.setTimeout($scope.load, 1000);
+            window.setTimeout($scope.load(callback), 1000);
          }
          else{
           var allUsers = _.union($scope.users,data);
           var finalUsers = _.uniq(allUsers);
           $scope.users = finalUsers;
           console.log(data);
+          callback();
          }
        })
        .error(function(data) {
@@ -26,20 +27,42 @@ ticketpicker.controller('main', ["$http","$randomPicker", "$dateService", "$scop
       });
    }
 
-   $scope.load();
+   var callback_ = function(){
+      finalUsers.forEach(function(user){
+        $scope.post('http://localhost:2080/api/users', user).error(function(data) {
+             console.log('Error: ' + data);
+        });
+      });
+   }
+
+   $scope.load(callback_);
 
     $scope.addUser = function(user){
         if(this.validUser(user))
+        {
             this.users.push(user);
+            $http.post('http://localhost:2080/api/users', user);
+        }
     }
 
     $scope.editUser = function($index, user){
         user.edit = false;
         if(this.validUser(user, true))
+        {
           $scope.users[$index] = user;
+          $http.delete('http://localhost:2080/api/users/'+user.name).success(function(data){
+             $http.post('http://localhost:2080/api/users', user);
+          }).error(function(data) {
+           console.log('Error: ' + data);
+          });
+        }
     }
 
     $scope.removeUser = function(userName){
+       $http.delete('http://localhost:2080/api/users/'+userName).error(function(data) {
+         console.log('Error: ' + data);
+        });
+
         $scope.users = this.users.filter(function(element){
             return element.name != userName;
         });
